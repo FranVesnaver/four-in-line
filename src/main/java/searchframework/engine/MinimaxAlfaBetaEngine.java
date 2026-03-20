@@ -30,16 +30,16 @@ public class MinimaxAlfaBetaEngine<S extends StateAdversary, P extends StateProb
 
     
     @Override
-    public int computeValue(StateAdversary state) {
-        return minMaxAB((S) state, maxDepth, state.isMax(),Integer.MIN_VALUE,Integer.MAX_VALUE);
+    public int computeValue(S state) {
+        return minMaxAB(state, maxDepth, state.isMax(),Integer.MIN_VALUE,Integer.MAX_VALUE);
     }
 
     @Override
-    public StateAdversary computeSuccessor(StateAdversary state) {
+    public S computeSuccessor(S state) {
         S bestSuccessor = null;
         int bestValue = Integer.MIN_VALUE;
         
-        for (S successor : p.getSuccessors((S) state)) {
+        for (S successor : p.getSuccessors(state)) {
             int value = minMaxAB(successor, maxDepth - 1, !state.isMax(),Integer.MIN_VALUE,Integer.MAX_VALUE);
             if (bestSuccessor == null || value > bestValue) {
                 bestValue = value;
